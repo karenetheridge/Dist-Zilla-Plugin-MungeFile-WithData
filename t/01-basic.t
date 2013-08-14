@@ -26,18 +26,11 @@ my $tzil = Builder->from_config(
             'source/lib/Module.pm' => <<'MODULE'
 package Module;
 
-my $DATA;
-my $string = # start template...{{
-    $DATA ?
-    do {
-"\n" . '"our list of items are: '
+my $string = {{
+'"our list of items are: '
 . join(', ', split(' ', $DATA))   # awk-style emulation
-. "\n" . 'And that\'s just great!\n";';
-}
-: ()
-# end template
-#}}
-;
+. "\n" . 'And that\'s just great!\n"'
+}};
 1;
 __DATA__
 dog
@@ -59,11 +52,8 @@ is(
     <<'NEW_MODULE',
 package Module;
 
-my $DATA;
-my $string = # start template...
-"our list of items are: dog, cat, pony
+my $string = "our list of items are: dog, cat, pony
 And that's just great!\n";
-;
 1;
 __DATA__
 dog

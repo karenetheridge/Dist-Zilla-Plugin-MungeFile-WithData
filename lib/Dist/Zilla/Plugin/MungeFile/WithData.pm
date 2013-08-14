@@ -53,18 +53,12 @@ In your F<dist.ini>:
 
 And during the build, F<lib/My/Module.pm>:
 
-    my $DATA;
-    my @stuff = qw(# start template...{{
+    my @stuff = qw(
         {{
-        $DATA ?
-        do {
             join "    \n",
             map { expensive_build_time_sub($_) }
             split(' ', $DATA)   # awk-style whitespace splitting
-        }
-        : ()
-        # end template
-        #}}
+        }}
     );
     __DATA__
     alpha
