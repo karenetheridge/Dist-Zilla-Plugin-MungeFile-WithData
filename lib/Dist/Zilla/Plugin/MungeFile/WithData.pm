@@ -23,16 +23,17 @@ sub munge_file
 {
     my ($self, $file) = @_;
 
-    my $content = $self->fill_in_string(
-        $file->content,
-        {
-            dist => \($self->zilla),
-            DATA => \($self->_data_from_file($file)),
-        },
-    );
-
     $self->log_debug([ 'MungeWithData updating contents of %s in memory', $file->name ]);
-    $file->content($content);
+
+    $file->content(
+        $self->fill_in_string(
+            $file->content,
+            {
+                dist => \($self->zilla),
+                DATA => \($self->_data_from_file($file)),
+            },
+        )
+    );
 }
 
 sub _data_from_file
