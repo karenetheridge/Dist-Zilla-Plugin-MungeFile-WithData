@@ -25,15 +25,15 @@ sub munge_file
 
     $self->log_debug([ 'MungeWithData updating contents of %s in memory', $file->name ]);
 
-    $file->content(
-        $self->fill_in_string(
-            $file->content,
-            {
-                dist => \($self->zilla),
-                DATA => \($self->_data_from_file($file)),
-            },
-        )
+    my $content = $self->fill_in_string(
+        $file->content,
+        {
+            dist => \($self->zilla),
+            DATA => \($self->_data_from_file($file)),
+        },
     );
+
+    $file->content($content);
 }
 
 sub _data_from_file
@@ -76,11 +76,18 @@ In your F<dist.ini>:
 
 And during the build, F<lib/My/Module.pm>:
 
-    my @stuff = qw(
-        {{ join "    \n",
+    my $DATA;
+    my @stuff = qw(# start template...{{
+        {{
+        $DATA ?
+        do {
+            join "    \n",
             map { expensive_build_time_sub($_) }
             split(' ', $DATA)   # awk-style whitespace splitting
-        }}
+        }
+        : ()
+        # end template
+        #}}
     );
     __DATA__
     alpha
