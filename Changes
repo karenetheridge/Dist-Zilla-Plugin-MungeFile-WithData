@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - simplified code, and greatly simplified use, by no longer loading
+            the target file before applying the templating
 
 0.001     2013-08-16 05:24:16Z (Karen Etheridge)
           - Initial release.

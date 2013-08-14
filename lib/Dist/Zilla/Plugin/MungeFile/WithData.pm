@@ -10,7 +10,6 @@ with (
     'Dist::Zilla::Role::FileFinderUser' => { default_finders => [ ] },
 );
 
-use Module::Metadata;
 use namespace::autoclean;
 
 sub munge_files
@@ -25,41 +24,19 @@ sub munge_file
 
     $self->log_debug([ 'MungeWithData updating contents of %s in memory', $file->name ]);
 
-    my $content = $self->fill_in_string(
-        $file->content,
-        {
-            dist => \($self->zilla),
-            DATA => \($self->_data_from_file($file)),
-        },
+    my $content = $file->content;
+    (my $data = $content) =~ s/^.*\n__DATA__\n/\n/s; # for win32
+    $data =~ s/\n__END__\n.*$/\n/s;
+
+    $file->content(
+        $self->fill_in_string(
+            $content,
+            {
+                dist => \($self->zilla),
+                DATA => \$data,
+            },
+        )
     );
-
-    $file->content($content);
-}
-
-sub _data_from_file
-{
-    my ($self, $file) = @_;
-
-    my $pkg = Module::Metadata->new_from_file($file->name)->name;
-
-    # note: DATA is a global, and if code ever tries to read from it more than
-    # once, the second time will fail -- if this is a problem, we will need to
-    # import Data::Section into the package and then have everything use that
-    # instead (and patch to handle reading from other packages), or seek
-    # to position 0 and find __DATA__ again -- also see Data::Section::Simple
-
-    require $file->name;
-    my $dh = do { no strict 'refs'; \*{"$pkg\::DATA"} };
-    # TODO: check defined fileno *$dh ?
-
-    my $data = '';
-    while (my $line = <$dh>)
-    {
-        last if $line =~ /^__END__/;
-        $data .= $line;
-    }
-
-    return $data;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -102,11 +79,6 @@ Is transformed to:
         SOMETHING_WITH_GAMMA
     );
 
-=head1 WARNING!
-
-This is not the feature set that is intended to be provided by this plugin.
-Use with discretion until the interface and features have stabilized!
-
 =head1 DESCRIPTION
 
 This is a C<FileMunger> plugin for L<Dist::Zilla> that passes the main module
@@ -116,16 +88,12 @@ content from the file's C<__DATA__> section.
 L<Text::Template> is used to transform the file by making the C<< $DATA >>
 variable available to all code blocks within C<< {{ }} >> sections.
 
-The module being transformed is loaded first, before the template content is
-transformed, in order to extract the C<__DATA__> section. While it would seem
-that the module will not compile in this state, it is possible to craft the
-file content in order to allow the file to parse (e.g. see
-L<Acme::CPANAuthors::Nonhuman> version 0.005).
-
-This is a wacky idea though (ether discovered she could be I<clever>! What
-fun!) and this will not be a permanent feature of this plugin - in the future
-it is intended that the C<__DATA__> section will instead be extracted by
-scanning the file for C<< qr/^__DATA__$/ >>.
+The data section is extracted by scanning the file for C<< qr/^__DATA__$/ >>,
+so this may pose a problem for you if you include this string in a here-doc or
+some other construct.  However, this method means we do not have to load the
+file before applying the template, which makes it much easier to construct
+your templates in F<.pm> files (i.e. not having to put C<{{> after a comment
+and inside a C<do> block, as was previously required).
 
 =for Pod::Coverage munge_files munge_file
 
