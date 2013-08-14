@@ -72,16 +72,28 @@ __END__
 In your F<dist.ini>:
 
     [MungeFile::WithData]
-    file = lib/My/Module.pm
-    house = maison
+    finder = :MainModule
 
 And during the build, F<lib/My/Module.pm>:
 
-    my ${{ $house }} = 'my castle';
+    my @stuff = qw(
+        {{ join "    \n",
+            map { expensive_build_time_sub($_) }
+            split(' ', $DATA)   # awk-style whitespace splitting
+        }}
+    );
+    __DATA__
+    alpha
+    beta
+    gamma
 
 Is transformed to:
 
-    my $maison = 'my castle';
+    my @stuff = qw(
+        SOMETHING_WITH_ALPHA
+        SOMETHING_WITH_BETA
+        SOMETHING_WITH_GAMMA
+    );
 
 =head1 WARNING!
 
