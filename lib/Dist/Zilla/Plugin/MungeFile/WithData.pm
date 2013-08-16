@@ -127,7 +127,7 @@ file before applying the template, which makes it much easier to construct
 your templates in F<.pm> files (i.e. not having to put C<{{> after a comment
 and inside a C<do> block, as was previously required).
 
-=for Pod::Coverage munge_files munge_file
+=for Pod::Coverage munge_files munge_file mvp_aliases
 
 =head1 OPTIONS
 
