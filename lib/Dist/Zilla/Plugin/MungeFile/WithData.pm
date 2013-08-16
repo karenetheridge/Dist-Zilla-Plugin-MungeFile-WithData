@@ -162,10 +162,22 @@ All other keys/values provided will be passed to the template as is.
 
 =head1 BACKGROUND
 
+=for stopwords syntactual
+
 This module was originally a part of the L<Acme::CPANAuthors::Nonhuman>
 distribution, used to transform a C<DATA> section containing a list of PAUSE
 ids to their corresponding names, as well as embedded HTML with everyone's
-avatar images.
+avatar images.  It used to only work on F<.pm> files, by first loading the
+module and then reading from a filehandle created from C<< \*{"$pkg\::DATA"} >>.
+This also required the file to jump through some convoluted syntactual hoops
+to ensure that the file was still compilable B<before> the template was run.
+(Check it out and roll your eyes:
+L<https://github.com/karenetheridge/Acme-CPANAuthors-Nonhuman/blob/v0.005/lib/Acme/CPANAuthors/Nonhuman.pm#L18>)
+
+Now that we support munging all file types, we are forced to parse the file
+more dumbly (by scanning for C<qr/^__DATA__/>), which also removes the need
+for these silly syntax games. The moral of the story is that simple code
+usually B<is> better!
 
 =head1 SUPPORT
 
