@@ -98,7 +98,7 @@ Is transformed to:
 =head1 WARNING!
 
 This is not the feature set that is intended to be provided by this plugin.
-Use with discretion until the interface and featurs have stabilized!
+Use with discretion until the interface and features have stabilized!
 
 =head1 DESCRIPTION
 
@@ -120,11 +120,15 @@ fun!) and this will not be a permanent feature of this plugin - in the future
 it is intended that the C<__DATA__> section will instead be extracted by
 scanning the file for C<< qr/^__DATA__$/ >>.
 
+=for Pod::Coverage munge_files munge_file
+
 =head1 OPTIONS
 
 =begin :list
 
 * C<finder>
+
+=for stopwords FileFinder
 
 This is the name of a L<FileFinder|Dist::Zilla::Role::FileFinder> for finding
 files to modify.
@@ -158,7 +162,7 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 =begin :list
 
 * L<Dist::Zilla::Plugin::Substitute>
-* L< Dist::Zilla::Plugin::TemplateFiles>
+* L<Dist::Zilla::Plugin::TemplateFiles>
 
 =end :list
 
