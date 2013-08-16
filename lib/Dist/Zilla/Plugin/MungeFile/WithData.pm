@@ -54,8 +54,13 @@ sub munge_file
     $self->log_debug([ 'MungeWithData updating contents of %s in memory', $file->name ]);
 
     my $content = $file->content;
-    (my $data = $content) =~ s/^.*\n__DATA__\n/\n/s; # for win32
-    $data =~ s/\n__END__\n.*$/\n/s;
+
+    my $data;
+    if ($content =~ m/\n__DATA__\n/sp)
+    {
+        $data = ${^POSTMATCH};
+        $data =~ s/\n__END__\n.*$/\n/s;
+    }
 
     $file->content(
         $self->fill_in_string(
