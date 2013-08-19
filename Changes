@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - now also passing the $plugin variable into templates
 
 0.002     2013-08-16 05:43:08Z (Karen Etheridge)
           - simplified code, and greatly simplified use, by no longer loading

@@ -68,6 +68,7 @@ sub munge_file
             {
                 $self->_extra_args,
                 dist => \($self->zilla),
+                plugin => \($self),
                 DATA => \$data,
             },
         )
