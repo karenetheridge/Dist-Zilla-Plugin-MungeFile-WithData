@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::MungeFile::WithData - Modify files in the build, with templ
 
 # VERSION
 
-version 0.002
+version 0.003
 
 # SYNOPSIS
 
@@ -84,7 +84,17 @@ and inside a `do` block, as was previously required).
 This module was originally a part of the [Acme::CPANAuthors::Nonhuman](http://search.cpan.org/perldoc?Acme::CPANAuthors::Nonhuman)
 distribution, used to transform a `DATA` section containing a list of PAUSE
 ids to their corresponding names, as well as embedded HTML with everyone's
-avatar images.
+avatar images.  It used to only work on `.pm` files, by first loading the
+module and then reading from a filehandle created from `\*{"$pkg\::DATA"}`.
+This also required the file to jump through some convoluted syntactual hoops
+to ensure that the file was still compilable __before__ the template was run.
+(Check it out and roll your eyes:
+[https://github.com/karenetheridge/Acme-CPANAuthors-Nonhuman/blob/v0.005/lib/Acme/CPANAuthors/Nonhuman.pm\#L18](https://github.com/karenetheridge/Acme-CPANAuthors-Nonhuman/blob/v0.005/lib/Acme/CPANAuthors/Nonhuman.pm\#L18))
+
+Now that we support munging all file types, we are forced to parse the file
+more dumbly (by scanning for `qr/^__DATA__/`), which also removes the need
+for these silly syntax games. The moral of the story is that simple code
+usually __is__ better!
 
 # SUPPORT
 
