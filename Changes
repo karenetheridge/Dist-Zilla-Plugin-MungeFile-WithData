@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.004     2013-08-27 01:01:57Z (Karen Etheridge)
           - fixed option names to match documentation (sorry, neilb!)
           - now documenting that we pass the dist and plugin objects to
             templates
