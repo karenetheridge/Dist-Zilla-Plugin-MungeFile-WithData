@@ -146,9 +146,9 @@ This is the name of a L<FileFinder|Dist::Zilla::Role::FileFinder> for finding
 files to modify.
 
 Other pre-defined finders are listed in
-L<FileFinder|Dist::Zilla::Role::FileFinderUser/default_finders>.
+L<Dist::Zilla::Role::FileFinderUser/default_finders>.
 You can define your own with the
-L<Dist::Zilla::Plugin::FileFinder::ByName|[FileFinder::ByName]> plugin.
+L<[FileFinder::ByName]|Dist::Zilla::Plugin::FileFinder::ByName> plugin.
 
 The default is C<:MainModule>.
 
