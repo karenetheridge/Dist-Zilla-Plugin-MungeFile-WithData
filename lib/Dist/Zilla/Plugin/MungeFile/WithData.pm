@@ -14,7 +14,7 @@ use List::Util 'first';
 use namespace::autoclean;
 
 sub mvp_multivalue_args { qw(files) }
-sub mvp_aliases { { _file => 'files' } }
+sub mvp_aliases { { file => 'files' } }
 
 has files => (
     isa  => 'ArrayRef[Str]',
