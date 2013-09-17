@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - warnings tests bypassed during installation
 
 0.004     2013-08-27 01:01:57Z (Karen Etheridge)
           - fixed option names to match documentation (sorry, neilb!)
