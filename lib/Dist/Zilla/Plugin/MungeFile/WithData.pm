@@ -51,7 +51,7 @@ sub munge_file
 {
     my ($self, $file) = @_;
 
-    $self->log_debug([ 'MungeWithData updating contents of %s in memory', $file->name ]);
+    $self->log_debug('updating contents of ' . $file->name . ' in memory');
 
     my $content = $file->content;
 
