@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::MungeFile::WithData - Modify files in the build, with templ
 
 # VERSION
 
-version 0.004
+version 0.005
 
 # SYNOPSIS
 
@@ -40,11 +40,11 @@ Is transformed to:
 
 # DESCRIPTION
 
-This is a `FileMunger` plugin for [Dist::Zilla](http://search.cpan.org/perldoc?Dist::Zilla) that passes the main module
-through a [Text::Template](http://search.cpan.org/perldoc?Text::Template), with a variable provided that contain the
+This is a `FileMunger` plugin for [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) that passes the main module
+through a [Text::Template](https://metacpan.org/pod/Text::Template), with a variable provided that contain the
 content from the file's `__DATA__` section.
 
-[Text::Template](http://search.cpan.org/perldoc?Text::Template) is used to transform the file by making the `$DATA`
+[Text::Template](https://metacpan.org/pod/Text::Template) is used to transform the file by making the `$DATA`
 variable available to all code blocks within `{{ }}` sections.
 
 The data section is extracted by scanning the file for `qr/^__DATA__$/`,
@@ -54,7 +54,7 @@ file before applying the template, which makes it much easier to construct
 your templates in `.pm` files (i.e. not having to put `{{` after a comment
 and inside a `do` block, as was previously required).
 
-The [Dist::Zilla](http://search.cpan.org/perldoc?Dist::Zilla) object (as `$dist`) and this plugin (as `$plugin`) are
+The [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) object (as `$dist`) and this plugin (as `$plugin`) are
 also made available to the template, for extracting other information about
 the build.
 
@@ -62,13 +62,13 @@ the build.
 
 - `finder`
 
-    This is the name of a [FileFinder](http://search.cpan.org/perldoc?Dist::Zilla::Role::FileFinder) for finding
+    This is the name of a [FileFinder](https://metacpan.org/pod/Dist::Zilla::Role::FileFinder) for finding
     files to modify.
 
     Other pre-defined finders are listed in
-    ["default\_finders" in Dist::Zilla::Role::FileFinderUser](http://search.cpan.org/perldoc?Dist::Zilla::Role::FileFinderUser#default\_finders).
+    ["default_finders" in Dist::Zilla::Role::FileFinderUser](https://metacpan.org/pod/Dist::Zilla::Role::FileFinderUser#default_finders).
     You can define your own with the
-    [\[FileFinder::ByName\]](http://search.cpan.org/perldoc?Dist::Zilla::Plugin::FileFinder::ByName) plugin.
+    [[FileFinder::ByName]](https://metacpan.org/pod/Dist::Zilla::Plugin::FileFinder::ByName) plugin.
 
     The default is `:MainModule`.
 
@@ -85,7 +85,7 @@ the build.
 
 # BACKGROUND
 
-This module was originally a part of the [Acme::CPANAuthors::Nonhuman](http://search.cpan.org/perldoc?Acme::CPANAuthors::Nonhuman)
+This module was originally a part of the [Acme::CPANAuthors::Nonhuman](https://metacpan.org/pod/Acme::CPANAuthors::Nonhuman)
 distribution, used to transform a `DATA` section containing a list of PAUSE
 ids to their corresponding names, as well as embedded HTML with everyone's
 avatar images.  It used to only work on `.pm` files, by first loading the
@@ -93,7 +93,7 @@ module and then reading from a filehandle created from `\*{"$pkg\::DATA"}`.
 This also required the file to jump through some convoluted syntactual hoops
 to ensure that the file was still compilable __before__ the template was run.
 (Check it out and roll your eyes:
-[https://github.com/karenetheridge/Acme-CPANAuthors-Nonhuman/blob/v0.005/lib/Acme/CPANAuthors/Nonhuman.pm\#L18](https://github.com/karenetheridge/Acme-CPANAuthors-Nonhuman/blob/v0.005/lib/Acme/CPANAuthors/Nonhuman.pm\#L18))
+[https://github.com/karenetheridge/Acme-CPANAuthors-Nonhuman/blob/v0.005/lib/Acme/CPANAuthors/Nonhuman.pm#L18](https://github.com/karenetheridge/Acme-CPANAuthors-Nonhuman/blob/v0.005/lib/Acme/CPANAuthors/Nonhuman.pm#L18))
 
 Now that we support munging all file types, we are forced to parse the file
 more dumbly (by scanning for `qr/^__DATA__/`), which also removes the need
@@ -108,8 +108,8 @@ I am also usually active on irc, as 'ether' at `irc.perl.org`.
 
 # SEE ALSO
 
-- [Dist::Zilla::Plugin::Substitute](http://search.cpan.org/perldoc?Dist::Zilla::Plugin::Substitute)
-- [Dist::Zilla::Plugin::TemplateFiles](http://search.cpan.org/perldoc?Dist::Zilla::Plugin::TemplateFiles)
+- [Dist::Zilla::Plugin::Substitute](https://metacpan.org/pod/Dist::Zilla::Plugin::Substitute)
+- [Dist::Zilla::Plugin::TemplateFiles](https://metacpan.org/pod/Dist::Zilla::Plugin::TemplateFiles)
 
 # AUTHOR
 
