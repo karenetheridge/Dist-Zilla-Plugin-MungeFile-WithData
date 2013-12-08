@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.006     2013-12-08 17:25:42Z
           - bump prereq for MooseX::SlurpyConstructor to bypass old metaclass
             issues
 

@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::MungeFile::WithData - Modify files in the build, with templ
 
 # VERSION
 
-version 0.005
+version 0.006
 
 # SYNOPSIS
 
