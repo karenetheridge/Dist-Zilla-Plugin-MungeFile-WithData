@@ -9,7 +9,7 @@ with (
     'Dist::Zilla::Role::TextTemplate',
     'Dist::Zilla::Role::FileFinderUser' => { default_finders => [ ] },
 );
-use MooseX::SlurpyConstructor;
+use MooseX::SlurpyConstructor 1.2;
 use List::Util 'first';
 use namespace::autoclean;
 
