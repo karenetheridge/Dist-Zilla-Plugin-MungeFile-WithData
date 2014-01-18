@@ -34,6 +34,22 @@ has _extra_args => (
     slurpy => 1,
 );
 
+around dump_config => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $config = $self->$orig;
+
+    $config->{'' . __PACKAGE__} = {
+        finder => $self->finder,
+        files => [ $self->files ],
+        $self->_extra_args,
+    };
+
+    return $config;
+};
+
 sub munge_files
 {
     my $self = shift;
