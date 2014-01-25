@@ -72,8 +72,11 @@ sub munge_file
 
     my $content = $file->content;
 
+    my $end_pos = $content =~ m/\n__END__\n/g && pos($content);
+    pos($content) = undef;
+
     my $data;
-    if ($content =~ m/\n__DATA__\n/sp)
+    if ($content =~ m/\n__DATA__\n/spg and (not $end_pos or pos($content) < $end_pos))
     {
         $data = ${^POSTMATCH};
         $data =~ s/\n__END__\n.*$/\n/s;
