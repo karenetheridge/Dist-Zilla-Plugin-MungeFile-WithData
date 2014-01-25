@@ -131,7 +131,10 @@ Is transformed to:
 
 =head1 DESCRIPTION
 
-This is a C<FileMunger> plugin for L<Dist::Zilla> that passes the main module
+=for stopwords FileMunger
+
+This is a L<FileMunger|Dist::Zilla::Role::FileMunger> plugin for
+L<Dist::Zilla> that passes a file(s)
 through a L<Text::Template>, with a variable provided that contain the
 content from the file's C<__DATA__> section.
 
