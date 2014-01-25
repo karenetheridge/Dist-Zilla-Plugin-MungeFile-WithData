@@ -3,17 +3,7 @@ use warnings FATAL => 'all';
 
 use Test::More;
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
-
 use Test::DZil;
-
-# create a dist with a boring dist.ini
-# and GatherDir
-# and our plugin
-# create an inline file
-# with a template and a __DATA__ section
-
-# the test consists of reading the file out of the build dir
-# and seeing that the content was transformed.
 
 my $tzil = Builder->from_config(
     { dist_root => 't/does_not_exist' },
