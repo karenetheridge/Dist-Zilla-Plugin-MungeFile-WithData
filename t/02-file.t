@@ -26,8 +26,6 @@ __DATA__
 dog
 cat
 pony
-__END__
-This is content that should not be in the DATA section.
 MODULE
         },
     },
@@ -49,8 +47,6 @@ __DATA__
 dog
 cat
 pony
-__END__
-This is content that should not be in the DATA section.
 NEW_MODULE
     'module content is transformed',
 );
