@@ -138,7 +138,7 @@ Is transformed to:
 
 This is a L<FileMunger|Dist::Zilla::Role::FileMunger> plugin for
 L<Dist::Zilla> that passes a file(s)
-through a L<Text::Template>, with a variable provided that contain the
+through a L<Text::Template>, with a variable provided that contains the
 content from the file's C<__DATA__> section.
 
 L<Text::Template> is used to transform the file by making the C<< $DATA >>
@@ -154,6 +154,9 @@ and inside a C<do> block, as was previously required).
 The L<Dist::Zilla> object (as C<$dist>) and this plugin (as C<$plugin>) are
 also made available to the template, for extracting other information about
 the build.
+
+Additionally, any extra keys and values you pass to the plugin are passed
+along in variables named for each key.
 
 =for Pod::Coverage munge_files munge_file mvp_aliases
 
@@ -173,7 +176,7 @@ L<Dist::Zilla::Role::FileFinderUser/default_finders>.
 You can define your own with the
 L<[FileFinder::ByName]|Dist::Zilla::Plugin::FileFinder::ByName> plugin.
 
-The default is C<:MainModule>.
+There is no default.
 
 =item * C<file>
 
@@ -220,7 +223,7 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 =begin :list
 
 * L<Dist::Zilla::Plugin::Substitute>
-* L<Dist::Zilla::Plugin::TemplateFiles>
+* L<Dist::Zilla::Plugin::GatherDir::Template>
 
 =end :list
 
