@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.007     2014-01-27 01:31:07Z
           - include our full config data in target dist's metadata
           - properly handle files where __DATA__ appears after __END__
           - renamed to [MungeFile::WithDataSection] (the original plugin still

@@ -19,19 +19,19 @@ patches you have.
 
 You may need to satisfy some dependencies.  The easiest way to satisfy
 dependencies is to install the last release -- this is available at
-https://metacpan.org/release/Dist-Zilla-Plugin-MungeFile-WithData.
+https://metacpan.org/release/Dist-Zilla-Plugin-MungeFile-WithDataSection.
 
 If you use cpanminus, you can do it without downloading the tarball first:
 
-  $ cpanm --reinstall --installdeps --with-recommends Dist::Zilla::Plugin::MungeFile::WithData
+  $ cpanm --reinstall --installdeps --with-recommends Dist::Zilla::Plugin::MungeFile::WithDataSection
 
 Dist::Zilla is a very powerful authoring tool, but requires a number of
 author-specific plugins.  If you would like to use it for contributing,
 install it from CPAN, then run one of the following commands, depending on
 your CPAN client:
 
-  $ cpan `dzil authordeps --missing | grep -v ^inc::`
-  $ dzil authordeps --missing | grep -v ^inc:: | cpanm
+  $ cpan `dzil authordeps --missing`
+  $ dzil authordeps --missing | cpanm
 
 You should then also install any additional requirements not needed by the
 dzil build but may be needed by tests or other development:
@@ -41,7 +41,7 @@ dzil build but may be needed by tests or other development:
 
 You can also do this via cpanm directly:
 
-  $ cpanm --reinstall --installdeps --with-develop --with-recommends Dist::Zilla::Plugin::MungeFile::WithData
+  $ cpanm --reinstall --installdeps --with-develop --with-recommends Dist::Zilla::Plugin::MungeFile::WithDataSection
 
 Once installed, here are some dzil commands you might try:
 
@@ -54,8 +54,8 @@ Once installed, here are some dzil commands you might try:
 
 You can learn more about Dist::Zilla at http://dzil.org/.
 
-The code for this distribution is hosted at GitHub. The main repository is:
-https://github.com/karenetheridge/Dist-Zilla-Plugin-MungeFile-WithData.
+The code for this distribution is hosted at GitHub. The repository is:
+https://github.com/karenetheridge/Dist-Zilla-Plugin-MungeFile-WithDataSection
 You can submit code changes by forking the repository, pushing your code
 changes to your clone, and then submitting a pull request. Detailed
 instructions for doing that is available here:
@@ -65,8 +65,8 @@ https://help.github.com/articles/creating-a-pull-request
 
 If you have found a bug, but do not have an accompanying patch to fix it, you
 can submit an issue report here:
-https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MungeFile-WithData
-or via bug-Dist-Zilla-Plugin-MungeFile-WithData@rt.cpan.org.
+https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MungeFile-WithDataSection
+or via bug-Dist-Zilla-Plugin-MungeFile-WithDataSection@rt.cpan.org.
 
 There is also a mailing list available for users of this distribution, at
 http://dzil.org/#mailing-list.
@@ -74,5 +74,5 @@ There is also an irc channel available for users of this distribution, at
 irc://irc.perl.org/#distzilla.
 
 
-This file was generated via Dist::Zilla::Plugin::GenerateFile::ShareDir 0.002 from a
-template file originating in Dist-Zilla-PluginBundle-Author-ETHER-0.042.
+This file was generated via Dist::Zilla::Plugin::GenerateFile::ShareDir 0.005 from a
+template file originating in Dist-Zilla-PluginBundle-Author-ETHER-0.048.

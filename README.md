@@ -1,16 +1,16 @@
 # NAME
 
-Dist::Zilla::Plugin::MungeFile::WithData - Modify files in the build, with templates and DATA section
+Dist::Zilla::Plugin::MungeFile::WithDataSection - Modify files in the build, with templates and DATA section
 
 # VERSION
 
-version 0.006
+version 0.007
 
 # SYNOPSIS
 
 In your `dist.ini`:
 
-    [MungeFile::WithData]
+    [MungeFile::WithDataSection]
     file = lib/My/Module.pm
     house = maison
 
@@ -40,8 +40,9 @@ Is transformed to:
 
 # DESCRIPTION
 
-This is a `FileMunger` plugin for [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) that passes the main module
-through a [Text::Template](https://metacpan.org/pod/Text::Template), with a variable provided that contain the
+This is a [FileMunger](https://metacpan.org/pod/Dist::Zilla::Role::FileMunger) plugin for
+[Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) that passes a file(s)
+through a [Text::Template](https://metacpan.org/pod/Text::Template), with a variable provided that contains the
 content from the file's `__DATA__` section.
 
 [Text::Template](https://metacpan.org/pod/Text::Template) is used to transform the file by making the `$DATA`
@@ -58,6 +59,9 @@ The [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) object (as `$dist`) and 
 also made available to the template, for extracting other information about
 the build.
 
+Additionally, any extra keys and values you pass to the plugin are passed
+along in variables named for each key.
+
 # OPTIONS
 
 - `finder`
@@ -66,11 +70,11 @@ the build.
     files to modify.
 
     Other pre-defined finders are listed in
-    ["default_finders" in Dist::Zilla::Role::FileFinderUser](https://metacpan.org/pod/Dist::Zilla::Role::FileFinderUser#default_finders).
+    ["default\_finders" in Dist::Zilla::Role::FileFinderUser](https://metacpan.org/pod/Dist::Zilla::Role::FileFinderUser#default_finders).
     You can define your own with the
-    [[FileFinder::ByName]](https://metacpan.org/pod/Dist::Zilla::Plugin::FileFinder::ByName) plugin.
+    [\[FileFinder::ByName\]](https://metacpan.org/pod/Dist::Zilla::Plugin::FileFinder::ByName) plugin.
 
-    The default is `:MainModule`.
+    There is no default.
 
 - `file`
 
@@ -102,14 +106,14 @@ usually __is__ better!
 
 # SUPPORT
 
-Bugs may be submitted through [the RT bug tracker](https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MungeFile::WithData)
-(or [bug-Dist-Zilla-Plugin-MungeFile::WithData@rt.cpan.org](mailto:bug-Dist-Zilla-Plugin-MungeFile::WithData@rt.cpan.org)).
+Bugs may be submitted through [the RT bug tracker](https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MungeFile::WithDataSection)
+(or [bug-Dist-Zilla-Plugin-MungeFile::WithDataSection@rt.cpan.org](mailto:bug-Dist-Zilla-Plugin-MungeFile::WithDataSection@rt.cpan.org)).
 I am also usually active on irc, as 'ether' at `irc.perl.org`.
 
 # SEE ALSO
 
 - [Dist::Zilla::Plugin::Substitute](https://metacpan.org/pod/Dist::Zilla::Plugin::Substitute)
-- [Dist::Zilla::Plugin::TemplateFiles](https://metacpan.org/pod/Dist::Zilla::Plugin::TemplateFiles)
+- [Dist::Zilla::Plugin::GatherDir::Template](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir::Template)
 
 # AUTHOR
 
