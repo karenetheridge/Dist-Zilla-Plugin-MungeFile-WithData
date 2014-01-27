@@ -1,3 +1,5 @@
 /.build/
 /Dist-Zilla-Plugin-MungeFile-WithData-*/
 /Dist-Zilla-Plugin-MungeFile-WithData-*.tar.gz
+/Dist-Zilla-Plugin-MungeFile-WithDataSection-*/
+/Dist-Zilla-Plugin-MungeFile-WithDataSection-*.tar.gz

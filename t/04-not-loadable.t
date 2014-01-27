@@ -11,7 +11,7 @@ my $tzil = Builder->from_config(
         add_files => {
             'source/dist.ini' => simple_ini(
                 [ GatherDir => ],
-                [ 'MungeFile::WithData' => { files => 'share/letter.txt', addressee => 'Bob' } ],
+                [ 'MungeFile::WithDataSection' => { files => 'share/letter.txt', addressee => 'Bob' } ],
             ),
             'source/share/letter.txt' => <<'LETTER',
 Dear {{ $addressee }},

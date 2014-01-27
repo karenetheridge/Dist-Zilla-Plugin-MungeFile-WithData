@@ -11,7 +11,7 @@ my $tzil = Builder->from_config(
         add_files => {
             'source/dist.ini' => simple_ini(
                 [ GatherDir => ],
-                [ 'MungeFile::WithData' => { file => ['lib/Module.pm'] } ],
+                [ 'MungeFile::WithDataSection' => { file => ['lib/Module.pm'] } ],
             ),
             'source/lib/Module.pm' => <<'MODULE'
 package Module;

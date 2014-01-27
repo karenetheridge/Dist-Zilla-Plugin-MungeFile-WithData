@@ -3,6 +3,8 @@ Revision history for {{$dist->name}}
 {{$NEXT}}
           - include our full config data in target dist's metadata
           - properly handle files where __DATA__ appears after __END__
+          - renamed to [MungeFile::WithDataSection] (the original plugin still
+            lives on, for now, in deprecated form)
 
 0.006     2013-12-08 17:25:42Z
           - bump prereq for MooseX::SlurpyConstructor to bypass old metaclass
