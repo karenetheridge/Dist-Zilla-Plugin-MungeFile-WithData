@@ -9,7 +9,9 @@ extends 'Dist::Zilla::Plugin::MungeFile::WithDataSection';
 use namespace::autoclean;
 
 before register_component => sub {
-    warn "!!! [MungeFile::WithData] is deprecated and will be removed in a future release; replace it with [MungeFile::WithDataSection]\n";
+    warnings::warnif('deprecated',
+        "!!! [MungeFile::WithData] is deprecated and will be removed in a future release; replace it with [MungeFile::WithDataSection]\n",
+    );
 };
 
 __PACKAGE__->meta->make_immutable;
