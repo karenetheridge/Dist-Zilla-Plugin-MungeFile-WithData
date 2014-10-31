@@ -33,6 +33,7 @@ MODULE
     },
 );
 
+$tzil->chrome->logger->set_debug(1);
 $tzil->build;
 
 my $content = $tzil->slurp_file('build/lib/Module.pm');
@@ -54,5 +55,8 @@ This is content that should not be in the DATA section.
 NEW_MODULE
     'module content is transformed',
 );
+
+diag 'got log messages: ', explain $tzil->log_messages
+    if not Test::Builder->new->is_passing;
 
 done_testing;

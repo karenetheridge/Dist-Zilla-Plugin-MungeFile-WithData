@@ -34,6 +34,7 @@ MODULE
     },
 );
 
+$tzil->chrome->logger->set_debug(1);
 $tzil->build;
 
 my $content = $tzil->slurp_file('build/lib/Module.pm');
@@ -57,5 +58,7 @@ NEW_MODULE
     'module content is transformed',
 );
 
-done_testing;
+diag 'got log messages: ', explain $tzil->log_messages
+    if not Test::Builder->new->is_passing;
 
+done_testing;

@@ -31,6 +31,7 @@ LETTER
     },
 );
 
+$tzil->chrome->logger->set_debug(1);
 $tzil->build;
 
 is(
@@ -50,5 +51,8 @@ Cheers,
 NEW_LETTER
     'non-compilable file content is transformed',
 );
+
+diag 'got log messages: ', explain $tzil->log_messages
+    if not Test::Builder->new->is_passing;
 
 done_testing;

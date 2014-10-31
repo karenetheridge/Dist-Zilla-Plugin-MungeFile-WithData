@@ -33,6 +33,7 @@ MODULE
     },
 );
 
+$tzil->chrome->logger->set_debug(1);
 $tzil->build;
 
 my $content = $tzil->slurp_file('build/lib/Module.pm');
@@ -59,5 +60,8 @@ pony
 NEW_MODULE
     '__DATA__ after __END__ is not seen',
 );
+
+diag 'got log messages: ', explain $tzil->log_messages
+    if not Test::Builder->new->is_passing;
 
 done_testing;
