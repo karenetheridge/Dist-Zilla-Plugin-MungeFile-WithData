@@ -1,11 +1,14 @@
 use strict;
 use warnings FATAL => 'all';
 
+use utf8;
 use Test::More;
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 use Test::DZil;
 use Path::Tiny;
 use Test::Deep;
+
+binmode $_, ':encoding(UTF-8)' foreach *STDOUT, *STDERR, map { Test::Builder->new->$_ } qw(output failure_output);
 
 my $tzil = Builder->from_config(
     { dist_root => 't/does_not_exist' },
@@ -14,7 +17,7 @@ my $tzil = Builder->from_config(
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
                 [ MetaConfig => ],
-                [ 'MungeFile::WithDataSection' => { finder => ':MainModule', house => 'maison' } ],
+                [ 'MungeFile::WithDataSection' => { finder => ':MainModule', house => 'château' } ],
             ),
             'source/lib/Module.pm' => <<'MODULE'
 package Module;
@@ -49,7 +52,7 @@ package Module;
 
 my $string = "our list of items are: dog, cat, pony
 And that's just great!\n";
-my $maison = 'my castle';
+my $château = 'my castle';
 1;
 __DATA__
 dog
@@ -72,7 +75,7 @@ cmp_deeply(
                         'Dist::Zilla::Plugin::MungeFile::WithDataSection' => {
                             finder => [ ':MainModule' ],
                             files => [ ],
-                            house => 'maison',
+                            house => "ch\x{e2}teau",
                         },
                     },
                     name => 'MungeFile::WithDataSection',
