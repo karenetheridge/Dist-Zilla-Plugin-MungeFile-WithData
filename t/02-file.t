@@ -5,6 +5,7 @@ use Test::More;
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 use Test::DZil;
 use Path::Tiny;
+use Test::Deep;
 
 my $tzil = Builder->from_config(
     { dist_root => 't/does_not_exist' },
@@ -12,6 +13,7 @@ my $tzil = Builder->from_config(
         add_files => {
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
+                [ MetaConfig => ],
                 [ 'MungeFile::WithDataSection' => { file => ['lib/Module.pm'] } ],
             ),
             'source/lib/Module.pm' => <<'MODULE'
@@ -52,6 +54,28 @@ pony
 NEW_MODULE
     'module content is transformed',
 );
+
+cmp_deeply(
+    $tzil->distmeta,
+    superhashof({
+        x_Dist_Zilla => superhashof({
+            plugins => supersetof(
+                {
+                    class => 'Dist::Zilla::Plugin::MungeFile::WithDataSection',
+                    config => {
+                        'Dist::Zilla::Plugin::MungeFile::WithDataSection' => {
+                            finder => [ ],
+                            files => [ 'lib/Module.pm' ],
+                        },
+                    },
+                    name => 'MungeFile::WithDataSection',
+                    version => ignore,
+                },
+            ),
+        }),
+    }),
+    'distmeta is correct',
+) or diag 'got distmeta: ', explain $tzil->distmeta;
 
 diag 'got log messages: ', explain $tzil->log_messages
     if not Test::Builder->new->is_passing;
