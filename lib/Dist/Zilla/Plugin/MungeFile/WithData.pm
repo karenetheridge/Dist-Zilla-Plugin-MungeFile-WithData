@@ -4,6 +4,8 @@ package Dist::Zilla::Plugin::MungeFile::WithData;
 # ABSTRACT: (DEPRECATED) Modify files in the build, with templates and DATA section
 # vim: set ts=8 sw=4 tw=78 et :
 
+our $VERSION = '0.008';
+
 use Moose;
 extends 'Dist::Zilla::Plugin::MungeFile::WithDataSection';
 use namespace::autoclean;

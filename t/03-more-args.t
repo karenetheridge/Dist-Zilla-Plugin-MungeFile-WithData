@@ -79,7 +79,7 @@ cmp_deeply(
                         },
                     },
                     name => 'MungeFile::WithDataSection',
-                    version => ignore,
+                    version => Dist::Zilla::Plugin::MungeFile::WithDataSection->VERSION,
                 },
             ),
         }),
