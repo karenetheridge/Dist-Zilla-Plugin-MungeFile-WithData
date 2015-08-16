@@ -222,6 +222,6 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 =for :list
 * L<Dist::Zilla::Plugin::Substitute>
 * L<Dist::Zilla::Plugin::GatherDir::Template>
-* L<Dist::Zilla::Plugin::MungeData::WithConfigFile>
+* L<Dist::Zilla::Plugin::MungeFile::WithConfigFile>
 
 =cut
