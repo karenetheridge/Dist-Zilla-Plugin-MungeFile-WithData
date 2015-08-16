@@ -63,9 +63,10 @@ cmp_deeply(
                 {
                     class => 'Dist::Zilla::Plugin::MungeFile::WithDataSection',
                     config => {
-                        'Dist::Zilla::Plugin::MungeFile::WithDataSection' => {
+                        'Dist::Zilla::Plugin::MungeFile' => {
                             finder => [ ],
                             files => [ 'lib/Module.pm' ],
+                            version => Dist::Zilla::Plugin::MungeFile->VERSION,
                         },
                     },
                     name => 'MungeFile::WithDataSection',

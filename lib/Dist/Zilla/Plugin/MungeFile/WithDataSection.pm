@@ -8,70 +8,14 @@ package Dist::Zilla::Plugin::MungeFile::WithDataSection;
 our $VERSION = '0.009';
 
 use Moose;
-with (
-    'Dist::Zilla::Role::FileMunger',
-    'Dist::Zilla::Role::TextTemplate',
-    'Dist::Zilla::Role::FileFinderUser' => { default_finders => [ ] },
-);
-use MooseX::SlurpyConstructor 1.2;
-use List::Util 'first';
+extends 'Dist::Zilla::Plugin::MungeFile';
 use namespace::autoclean;
 
-sub mvp_multivalue_args { qw(files) }
-sub mvp_aliases { { file => 'files' } }
-
-has files => (
-    isa  => 'ArrayRef[Str]',
-    lazy => 1,
-    default => sub { [] },
-    traits => ['Array'],
-    handles => { files => 'sort' },
-);
-
-has _extra_args => (
-    isa => 'HashRef[Str]',
-    init_arg => undef,
-    lazy => 1,
-    default => sub { {} },
-    traits => ['Hash'],
-    handles => { _extra_args => 'elements' },
-    slurpy => 1,
-);
-
-around dump_config => sub
-{
-    my $orig = shift;
-    my $self = shift;
-
-    my $config = $self->$orig;
-
-    $config->{'' . __PACKAGE__} = {
-        finder => $self->finder,
-        files => [ $self->files ],
-        $self->_extra_args,
-    };
-
-    return $config;
-};
-
-sub munge_files
-{
-    my $self = shift;
-
-    my @files = map {
-        my $filename = $_;
-        my $file = first { $_->name eq $filename } @{ $self->zilla->files };
-        defined $file ? $file : ()
-    } $self->files;
-
-    $self->munge_file($_) for @files, @{ $self->found_files };
-}
+# around dump_config => sub ...  no additional configs to add
 
 sub munge_file
 {
     my ($self, $file) = @_;
-
-    $self->log_debug([ 'updating contents of %s in memory', $file->name ]);
 
     my $content = $file->content;
 
@@ -85,16 +29,9 @@ sub munge_file
         $data =~ s/\n__END__\n.*$/\n/s;
     }
 
-    $file->content(
-        $self->fill_in_string(
-            $content,
-            {
-                $self->_extra_args,     # must be first
-                dist => \($self->zilla),
-                plugin => \$self,
-                DATA => \$data,
-            },
-        )
+    $self->next::method(
+        $file,
+        { DATA => \$data },
     );
 }
 
@@ -192,7 +129,7 @@ All other keys/values provided will be passed to the template as is.
 
 =head1 BACKGROUND
 
-=for stopwords syntactual
+=for stopwords syntactual templater
 
 This module was originally a part of the L<Acme::CPANAuthors::Nonhuman>
 distribution, used to transform a C<DATA> section containing a list of PAUSE
@@ -209,6 +146,10 @@ more dumbly (by scanning for C<qr/^__DATA__/>), which also removes the need
 for these silly syntax games. The moral of the story is that simple code
 usually B<is> better!
 
+I have also since split off much of this distribution into a superclass
+plugin, L<Dist::Zilla::Plugin::MungeFile>, which provides a general-use munger
+and templater without the C<__DATA__> support.
+
 =head1 SUPPORT
 
 =for stopwords irc
@@ -222,6 +163,7 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 =for :list
 * L<Dist::Zilla::Plugin::Substitute>
 * L<Dist::Zilla::Plugin::GatherDir::Template>
+* L<Dist::Zilla::Plugin::MungeFile>
 * L<Dist::Zilla::Plugin::MungeFile::WithConfigFile>
 
 =cut
