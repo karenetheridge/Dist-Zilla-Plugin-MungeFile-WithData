@@ -14,23 +14,13 @@ my $tzil = Builder->from_config(
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
                 [ MetaConfig => ],
-                [ 'MungeFile::WithDataSection' => { finder => ':MainModule' } ],
+                [ 'MungeFile' => { finder => ':MainModule' } ],
             ),
             'source/lib/Module.pm' => <<'MODULE'
 package Module;
 
-my $string = {{
-'"our list of items are: '
-. join(', ', split(' ', $DATA))   # awk-style emulation
-. "...\n" . 'And that\'s just great!\n"'
-}};
+my $string = "{{ uc('hello hello') }}";
 1;
-__END__
-This is content that should not be in the DATA section.
-__DATA__
-dog
-cat
-pony
 MODULE
         },
     },
@@ -41,27 +31,15 @@ $tzil->build;
 
 my $content = $tzil->slurp_file('build/lib/Module.pm');
 
-    if ($content =~ m/(?:\n__END__(\n.*)?)\n__DATA__\n/sp)
-    {
-        print "### matched end then data\n";
-    }
-
 is(
     $content,
     <<'NEW_MODULE',
 package Module;
 
-my $string = "our list of items are: ...
-And that's just great!\n";
+my $string = "HELLO HELLO";
 1;
-__END__
-This is content that should not be in the DATA section.
-__DATA__
-dog
-cat
-pony
 NEW_MODULE
-    '__DATA__ after __END__ is not seen',
+    'module content is transformed',
 );
 
 cmp_deeply(
@@ -70,15 +48,15 @@ cmp_deeply(
         x_Dist_Zilla => superhashof({
             plugins => supersetof(
                 {
-                    class => 'Dist::Zilla::Plugin::MungeFile::WithDataSection',
+                    class => 'Dist::Zilla::Plugin::MungeFile',
                     config => {
                         'Dist::Zilla::Plugin::MungeFile' => {
                             finder => [ ':MainModule' ],
                             files => [ ],
                         },
                     },
-                    name => 'MungeFile::WithDataSection',
-                    version => Dist::Zilla::Plugin::MungeFile::WithDataSection->VERSION,
+                    name => 'MungeFile',
+                    version => Dist::Zilla::Plugin::MungeFile->VERSION,
                 },
             ),
         }),

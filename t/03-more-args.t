@@ -72,7 +72,7 @@ cmp_deeply(
                 {
                     class => 'Dist::Zilla::Plugin::MungeFile::WithDataSection',
                     config => {
-                        'Dist::Zilla::Plugin::MungeFile::WithDataSection' => {
+                        'Dist::Zilla::Plugin::MungeFile' => {
                             finder => [ ':MainModule' ],
                             files => [ ],
                             house => "ch\x{e2}teau",
