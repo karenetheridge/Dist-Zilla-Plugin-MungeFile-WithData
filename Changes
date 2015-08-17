@@ -2,6 +2,7 @@ Revision history for Dist-Zilla-Plugin-MungeFiles-WithDataSection
 
 {{$NEXT}}
           - mark Dist::Zilla::Plugin::MungeFile::WithData as deprecated in metadata
+          - updated some bits of the distribution packaging
 
 0.007     2014-01-27 01:31:07Z
           - include our full config data in target dist's metadata
