@@ -146,6 +146,10 @@ more dumbly (by scanning for C<qr/^__DATA__/>), which also removes the need
 for these silly syntax games. The moral of the story is that simple code
 usually B<is> better!
 
+I have also since split off much of this distribution into a superclass
+plugin, L<Dist::Zilla::Plugin::MungeFile>, which provides a general-use munger
+and templater without the C<__DATA__> support.
+
 =head1 SUPPORT
 
 =for stopwords irc
