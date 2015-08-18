@@ -5,7 +5,7 @@ package Dist::Zilla::Plugin::MungeFile::WithDataSection;
 # KEYWORDS: plugin file content injection modification template DATA __DATA__ section
 # vim: set ts=8 sts=4 sw=4 tw=115 et :
 
-our $VERSION = '0.008';
+our $VERSION = '0.009';
 
 use Moose;
 with (
