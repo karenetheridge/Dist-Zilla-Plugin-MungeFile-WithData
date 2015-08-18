@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Plugin-MungeFiles-WithDataSection
 
-{{$NEXT}}
+0.008     2015-08-18 01:55:04Z
           - mark Dist::Zilla::Plugin::MungeFile::WithData as deprecated in metadata
           - updated some bits of the distribution packaging
 
