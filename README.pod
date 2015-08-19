@@ -8,7 +8,7 @@ Dist::Zilla::Plugin::MungeFile::WithDataSection - Modify files in the build, wit
 
 =head1 VERSION
 
-version 0.008
+version 0.009
 
 =head1 SYNOPSIS
 
@@ -99,7 +99,7 @@ All other keys/values provided will be passed to the template as is.
 
 =head1 BACKGROUND
 
-=for stopwords syntactual
+=for stopwords syntactual templater
 
 This module was originally a part of the L<Acme::CPANAuthors::Nonhuman>
 distribution, used to transform a C<DATA> section containing a list of PAUSE
@@ -115,6 +115,10 @@ Now that we support munging all file types, we are forced to parse the file
 more dumbly (by scanning for C<qr/^__DATA__/>), which also removes the need
 for these silly syntax games. The moral of the story is that simple code
 usually B<is> better!
+
+I have also since split off much of this distribution into a superclass
+plugin, L<Dist::Zilla::Plugin::MungeFile>, which provides a general-use munger
+and templater without the C<__DATA__> support.
 
 =head1 SUPPORT
 
@@ -135,6 +139,10 @@ L<Dist::Zilla::Plugin::Substitute>
 =item *
 
 L<Dist::Zilla::Plugin::GatherDir::Template>
+
+=item *
+
+L<Dist::Zilla::Plugin::MungeFile>
 
 =item *
 

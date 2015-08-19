@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Plugin-MungeFile-WithDataSection
 
-{{$NEXT}}
+0.009     2015-08-19 01:20:12Z
           - split off much of this distribution into
             Dist::Zilla::Plugin::MungeFile, for greater visibility
 
