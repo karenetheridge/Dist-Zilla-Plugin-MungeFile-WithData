@@ -150,14 +150,6 @@ I have also since split off much of this distribution into a superclass
 plugin, L<Dist::Zilla::Plugin::MungeFile>, which provides a general-use munger
 and templater without the C<__DATA__> support.
 
-=head1 SUPPORT
-
-=for stopwords irc
-
-Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-MungeFile::WithDataSection>
-(or L<bug-Dist-Zilla-Plugin-MungeFile::WithDataSection@rt.cpan.org|mailto:bug-Dist-Zilla-Plugin-MungeFile::WithDataSection@rt.cpan.org>).
-I am also usually active on irc, as 'ether' at C<irc.perl.org>.
-
 =head1 SEE ALSO
 
 =for :list
