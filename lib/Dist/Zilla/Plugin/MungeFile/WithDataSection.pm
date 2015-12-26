@@ -11,7 +11,18 @@ use Moose;
 extends 'Dist::Zilla::Plugin::MungeFile';
 use namespace::autoclean;
 
-# around dump_config => sub ...  no additional configs to add
+around dump_config => sub
+{
+    my ($orig, $self) = @_;
+    my $config = $self->$orig;
+
+    my $data = {
+        blessed($self) ne __PACKAGE__ ? ( version => $VERSION ) : (),
+    };
+    $config->{+__PACKAGE__} = $data if keys %$data;
+
+    return $config;
+};
 
 sub munge_file
 {
